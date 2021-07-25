@@ -12,7 +12,7 @@ const convertScore = (score: number) => {
 	return 3;
 };
 
-const format = (text: string, splitter = "@") => {
+const format = (text: string, splitter: string) => {
 	let formatted = text
 		.split(splitter)
 		.map((s) => s.trim())
@@ -24,11 +24,14 @@ const format = (text: string, splitter = "@") => {
 const evaluate = (sentence: string) => {
 	let result = sentiment.analyze(sentence);
 	let score = convertScore(result.comparative);
-	return sentence + "@" + score;
+	return {
+		sentence,
+		score,
+	};
 };
 
-const mainLogic = (text: string) => {
-	let sentences = format(text);
+const mainLogic = (text: string, splitter = "@") => {
+	let sentences = format(text, splitter);
 	let data = sentences.map(evaluate);
 	return data;
 };
