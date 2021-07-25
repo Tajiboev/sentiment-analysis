@@ -3,10 +3,10 @@ import { mainLogic } from "./logic";
 
 const analyze = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { text } = req.body;
-		let result = mainLogic(text);
+		const { text, splitter } = req.body;
+		let result = mainLogic(text, splitter);
 		res.status(200).json({
-			result,
+			data: result,
 		});
 	} catch (error) {
 		next(error);
