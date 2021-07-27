@@ -4,10 +4,8 @@
   "description": "A sentiment analysis tool to rate FOMC statements",
   "main": "build/server.js",
   "scripts": {
-    "dev": "nodemon source/server.ts",
-    "start": "pm2 start build/server.js -i max",
-    "stop": "pm2 stop all",
-    "delete": "pm2 delete all"
+    "dev": "nodemon source/pm2.ts",
+    "start": "node build/pm2.js"
   },
   "keywords": [
     "NPL",

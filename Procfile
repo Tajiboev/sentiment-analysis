@@ -1,1 +1,1 @@
-web: pm2 start build/server.js -i max
+web: node build/pm2.js
