@@ -19,13 +19,13 @@ app.use(express.json());
 
 const limiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
-	max: 2, // limit each IP to 100 requests per windowMs
+	max: 20, // limit each IP to 20 requests per windowMs
 });
 
 const speedLimiter = slowDown({
-	windowMs: 10 * 60 * 1000, // 10 minutes
-	delayAfter: 2, // allow 100 requests per 10 minutes, then...
-	delayMs: 500, // begin adding 500ms of delay per request above 100:
+	windowMs: 1 * 60 * 1000, // 1 minute
+	delayAfter: 15, // allow 15 requests per 1 minute, then...
+	delayMs: 500, // begin adding 500ms of delay per request above 100
 });
 
 app.use(limiter);
