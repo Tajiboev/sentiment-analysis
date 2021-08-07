@@ -14,13 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = require("http");
 const app_1 = __importDefault(require("./app"));
+const log_1 = __importDefault(require("./log"));
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("Starting server");
+        log_1.default.info("Starting server");
         const port = process.env.PORT || 5000;
         const server = http_1.createServer(app_1.default);
         server.listen(port, () => {
-            console.info(`Server listening on port ${port}`);
+            log_1.default.info(`Server listening on port ${port}`);
         });
     }
     catch (err) {

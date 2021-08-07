@@ -8,21 +8,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.analyze = void 0;
-const httpError_1 = __importDefault(require("../utils/httpError"));
 const logic_1 = require("./logic");
 const analyze = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { text } = req.body;
-        if (!text)
-            throw new httpError_1.default("Empty text", 400);
-        let bySentence = logic_1.eachSentence(text);
-        let overall = logic_1.wholeText(text);
-        res.status(200).json({ bySentence, overall });
+        const { text, split } = req.body;
+        if (!split) {
+            let result = logic_1.overall(text);
+            res.status(200).json(result);
+        }
+        else {
+            let result = logic_1.bySentence(text);
+            res.status(200).json(result);
+        }
     }
     catch (error) {
         next(error);

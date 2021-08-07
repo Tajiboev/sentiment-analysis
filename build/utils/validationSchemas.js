@@ -7,6 +7,6 @@ exports.analyzeSchema = void 0;
 const joi_1 = __importDefault(require("joi"));
 const analyzeSchema = joi_1.default.object({
     text: joi_1.default.string().required(),
-    splitter: joi_1.default.string(),
-});
+    split: joi_1.default.boolean().sensitive(false).required(),
+}).strict();
 exports.analyzeSchema = analyzeSchema;
