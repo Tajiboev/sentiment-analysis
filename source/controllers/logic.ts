@@ -1,18 +1,35 @@
 import Sentiment from "sentiment";
 const sentiment = new Sentiment();
 
-const eachSentence = (text: string) => {
+const bySentence = (text: string) => {
 	let sentences = text.split(".").filter((s) => s !== "");
 
 	let data = sentences.map((sentence) => {
-		return sentiment.analyze(sentence);
+		let result = sentiment.analyze(sentence);
+		let converted = convertScore(result.comparative);
+		return {
+			sentence,
+			converted,
+			...result,
+		};
 	});
 
 	return data;
 };
 
-const wholeText = (text: string) => {
-	return sentiment.analyze(text);
+const overall = (text: string) => {
+	let result = sentiment.analyze(text);
+	let converted = convertScore(result.comparative);
+	return {
+		text,
+		converted,
+		...result,
+	};
 };
 
-export { eachSentence, wholeText };
+const convertScore = (score: number): number => {
+	let num = (100 + score * 20) / 2;
+	return Math.round(num * 100) / 100;
+};
+
+export { bySentence, overall };

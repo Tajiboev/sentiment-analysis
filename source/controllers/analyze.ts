@@ -1,14 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import HTTPError from "../utils/httpError";
-import { eachSentence, wholeText } from "./logic";
+import { bySentence, overall } from "./logic";
 
 const analyze = async (req: Request, res: Response, next: NextFunction) => {
 	try {
-		const { text } = req.body;
-		if (!text) throw new HTTPError("Empty text", 400);
-		let bySentence = eachSentence(text);
-		let overall = wholeText(text);
-		res.status(200).json({ bySentence, overall });
+		const { text, split } = req.body;
+		if (!split) {
+			let result = overall(text);
+			res.status(200).json(result);
+		} else {
+			let result = bySentence(text);
+			res.status(200).json(result);
+		}
 	} catch (error) {
 		next(error);
 	}
