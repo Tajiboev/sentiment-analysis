@@ -11,8 +11,8 @@ const bySentence = (text) => {
     let data = sentences.map((sentence) => {
         let result = sentiment.analyze(sentence);
         let converted = convertScore(result.comparative);
-        return Object.assign({ sentence,
-            converted }, result);
+        return Object.assign(Object.assign({ sentence,
+            converted }, result), { comparative: Math.round(result.comparative * 100) / 100 });
     });
     return data;
 };
@@ -20,8 +20,8 @@ exports.bySentence = bySentence;
 const overall = (text) => {
     let result = sentiment.analyze(text);
     let converted = convertScore(result.comparative);
-    return Object.assign({ text,
-        converted }, result);
+    return Object.assign(Object.assign({ text,
+        converted }, result), { comparative: Math.round(result.comparative * 100) / 100 });
 };
 exports.overall = overall;
 const convertScore = (score) => {
