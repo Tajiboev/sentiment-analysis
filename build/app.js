@@ -40,6 +40,9 @@ const speedLimiter = express_slow_down_1.default({
 app.use(limiter);
 app.use(speedLimiter);
 app.use(router_1.default);
+app.get("/healthcheck", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.sendStatus(200);
+}));
 app.use((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     next(new httpError_1.default("Not found", 404));
 }));

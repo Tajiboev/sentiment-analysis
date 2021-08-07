@@ -34,6 +34,12 @@ app.use(speedLimiter);
 //route
 app.use(router);
 
+//healthcheck
+
+app.get("/healthcheck", async (req, res) => {
+	res.sendStatus(200);
+});
+
 //errors
 app.use(async (req: Request, res: Response, next: NextFunction) => {
 	next(new HTTPError("Not found", 404));

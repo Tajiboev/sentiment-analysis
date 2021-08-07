@@ -1,28 +1,18 @@
 import Sentiment from "sentiment";
 const sentiment = new Sentiment();
 
-const format = (text: string, splitter: string) => {
-	let formatted = text
-		.split(splitter)
-		.map((s) => s.trim())
-		.filter((s) => s !== "");
+const eachSentence = (text: string) => {
+	let sentences = text.split(".").filter((s) => s !== "");
 
-	return formatted;
-};
+	let data = sentences.map((sentence) => {
+		return sentiment.analyze(sentence);
+	});
 
-const evaluate = (sentence: string) => {
-	let result = sentiment.analyze(sentence);
-	return {
-		sentence,
-		score: result.score,
-		comparative: result.comparative,
-	};
-};
-
-const mainLogic = (text: string, splitter = ".") => {
-	let sentences = format(text, splitter);
-	let data = sentences.map(evaluate);
 	return data;
 };
 
-export { mainLogic };
+const wholeText = (text: string) => {
+	return sentiment.analyze(text);
+};
+
+export { eachSentence, wholeText };
