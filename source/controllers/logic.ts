@@ -11,6 +11,7 @@ const bySentence = (text: string) => {
 			sentence,
 			converted,
 			...result,
+			comparative: Math.round(result.comparative * 100) / 100,
 		};
 	});
 
@@ -24,6 +25,7 @@ const overall = (text: string) => {
 		text,
 		converted,
 		...result,
+		comparative: Math.round(result.comparative * 100)/100
 	};
 };
 
