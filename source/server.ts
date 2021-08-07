@@ -1,13 +1,14 @@
 import { createServer } from "http";
 import app from "./app";
+import log from "./log";
 
 const start = async () => {
 	try {
-		console.log("Starting server");
+		log.info("Starting server");
 		const port = process.env.PORT || 5000;
 		const server = createServer(app);
 		server.listen(port, () => {
-			console.info(`Server listening on port ${port}`);
+			log.info(`Server listening on port ${port}`);
 		});
 	} catch (err) {
 		console.error(err);
