@@ -6,6 +6,8 @@ import HTTPError from "./utils/httpError";
 import router from "./router";
 import rateLimit from "express-rate-limit";
 import slowDown from "express-slow-down";
+// import log from "./log";
+// import logger from "./middleware/logger";
 
 const app = express();
 
@@ -16,6 +18,8 @@ app.use(cors());
 app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// app.use(logger);
 
 const limiter = rateLimit({
 	windowMs: 1 * 60 * 1000, // 1 minute
